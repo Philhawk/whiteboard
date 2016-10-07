@@ -26,17 +26,17 @@ window.whiteboard = new window.EventEmitter();
     });
 
     var canvas = document.getElementById('paint');
-    
+
     var ctx = canvas.getContext('2d')
 
     function resize() {
         // Unscale the canvas (if it was previously scaled)
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-        
+
         // The device pixel ratio is the multiplier between CSS pixels
         // and device pixels
-        var pixelRatio = window.devicePixelRatio || 1;    
-        
+        var pixelRatio = window.devicePixelRatio || 1;
+
         // Allocate backing store large enough to give us a 1:1 device pixel
         // to canvas pixel ratio.
         var w = canvas.clientWidth * pixelRatio,
@@ -56,15 +56,15 @@ window.whiteboard = new window.EventEmitter();
         // ratio to ensure that 1 canvas unit = 1 css pixel, even though our
         // backing store is larger.
         ctx.scale(pixelRatio, pixelRatio);
-        
+
         ctx.lineWidth = 5
         ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';     
+        ctx.lineCap = 'round';
     }
-    
+
     resize()
-    window.addEventListener('resize', resize) 
-    
+    window.addEventListener('resize', resize)
+
     var currentMousePosition = {
         x: 0,
         y: 0
@@ -117,7 +117,7 @@ window.whiteboard = new window.EventEmitter();
         if (shouldBroadcast) {
             whiteboard.emit('draw', start, end, strokeColor);
         }
-        
+
     };
 
 })();
